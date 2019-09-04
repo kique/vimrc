@@ -5,6 +5,7 @@ set nu
 set encoding=utf-8
 
 syntax enable
+
 set background=dark
 colorscheme solarized
 
@@ -43,6 +44,8 @@ Plugin 'tpope/vim-surround'
 
 Plugin 'bling/vim-airline'
 
+Plugin 'vim-airline/vim-airline-themes'
+
 Plugin 'vim-scripts/functionlist.vim'
 
 Plugin 'Valloric/YouCompleteMe'
@@ -62,6 +65,10 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 
 Plugin 'jistr/vim-nerdtree-tabs'
+
+Plugin 'xolox/vim-misc'
+
+Plugin 'xolox/vim-easytags'
 
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
@@ -88,6 +95,12 @@ filetype plugin indent on    " required
 "
 call togglebg#map("<F5>")
 map <F3> :NERDTreeToggle<CR>
+map <C-Right> :tabn<cr>
+map <C-Left> :tabp<cr>
+
+let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+"dnf install powerline-fonts
 
 let  g:C_UseTool_doxygen = 'yes' 
 
@@ -115,21 +128,34 @@ set foldlevel=99
 let g:SimpylFold_docstring_preview=1
 
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
 
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+au BufNewFile,BufRead *.js,*.html,*.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
 
 "Agrega avisos donde se encuentren espacios en blanco
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+"au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
 
+" C
+"au BufRead,BufNewFile *.c,*.h set expandtab
+"au BufRead,BufNewFile *.c,*.h set tabstop=4
+"au BufRead,BufNewFile *.c,*.h set shiftwidth=4
+"au BufRead,BufNewFile *.c,*.h set autoindent
+"au BufRead,BufNewFile *.c,*.h match BadWhitespace /^\t\+/
+"au BufRead,BufNewFile *.c,*.h match BadWhitespace /\s\+$/
+"au         BufNewFile *.c,*.h set fileformat=unix
+"au BufRead,BufNewFile *.c,*.h let b:comment_leader = '/* '
+"
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"Permite cambiar el fondo entre Dark y Light usando la tecla F5
+call togglebg#map("<F5>")
