@@ -3,8 +3,6 @@ filetype off                  " required
 set hidden
 set showtabline=0
 set encoding=utf8
-"set guifont=<FONT_NAME> <FONT_SIZE>
-let g:airline_powerline_fonts = 1
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -30,8 +28,9 @@ Plugin 'yuttie/comfortable-motion.vim'      " Smooth scrolling
 Plugin 'MattesGroeger/vim-bookmarks'        " Bookmarks
 Plugin 'thaerkh/vim-indentguides'           " Visual representation of indents
 Plugin 'w0rp/ale'                           " Async Lint Engine
+Plugin 'rdnetto/YCM-Generator'
 Plugin 'Valloric/YouCompleteMe'             " Code Completion
-
+"let g:ycm_global_ycm_extra_conf = '$USER/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "-------------------=== Other ===-------------------------------
 Plugin 'tpope/vim-surround'                 " Parentheses, brackets, quotes, XML tags, and more
 Plugin 'flazz/vim-colorschemes'             " Colorschemes
@@ -57,10 +56,6 @@ Plugin 'mitsuhiko/vim-python-combined'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'jmcantrell/vim-virtualenv'
 
-"------------------ === C/C++ ===-------------------------------
-
-Plugin 'WolfgangMehner/c-support'           "C/C++ IDE
-
 " All of your Plugins must be added before the following line
 call vundle#end()                           " required
 filetype on
@@ -76,8 +71,8 @@ endif
 set encoding=utf-8
 set t_Co=256                                " 256 colors
 set guifont=mononoki\ Nerd\ Font\ 18
-colorscheme solarized               " set vim colorscheme
-let g:airline_theme='solarized'                " set airline theme
+colorscheme wombat256mod                    " set vim colorscheme
+let g:airline_theme='wombat'                " set airline theme
 syntax enable                               " enable syntax highlighting
 
 set pyxversion=0
@@ -124,7 +119,8 @@ nmap <silent> <leader>q :SyntasticCheck # <CR> :bp <BAR> bd #<CR>
 "=====================================================
 "" YouCompleteMe Settings
 "=====================================================
-
+"Se instalo rdnetto/YCM-Generator y se usó :YcmGenerateConfig para generar el
+"archivo de configuración en el proyecto
 "=====================================================
 "" Ale Settings (Linting)
 "=====================================================
@@ -153,7 +149,7 @@ let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:comfortable_motion_impulse_multiplier = 25  " Feel free to increase/decrease this value.
-"nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
 nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
 nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 4)<CR>
 nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -4)<CR>
@@ -176,7 +172,7 @@ autocmd BufWinLeave *.py :TagbarClose
 "=====================================================
 "" NERDTree settings
 "=====================================================
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$', '\.o$']     " Ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$','\.o$']     " Ignore files in NERDTree
 let NERDTreeWinSize=40
 nmap " :NERDTreeToggle<CR>
 
@@ -341,6 +337,9 @@ augroup vimrc_autocmds
     autocmd FileType python,rst,c,cpp set colorcolumn=80
 augroup END
 
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
 " code folding
 let g:pymode_folding=0
 
@@ -379,8 +378,7 @@ autocmd StdinReadPre * let g:isReadingFromStdin = 1
 autocmd VimEnter * nested if !argc() && !exists('g:isReadingFromStdin') | Startify | endif
 autocmd VimEnter * nested if !argc() && !exists('g:isReadingFromStdin') | NERDTree | endif
 
-"Usar comentarios para Doxyen en cvim
-let g:C_UseTool_doxygen = 'yes'
+"DEPENDENCIAS
+"Para tipografia y logos en vim que usa NerdTree instalar DevIcons
+"en Archlinux usar el AUR https://aur.archlinux.org/packages/nerd-fonts-complete/
 
-"Visualizar Tagbar
-nmap <F8> :TagbarToggle<CR>
